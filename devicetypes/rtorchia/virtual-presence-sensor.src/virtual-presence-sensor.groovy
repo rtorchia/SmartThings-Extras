@@ -35,26 +35,29 @@ metadata {
 
 def installed() {
     log.trace "Executing 'installed()'"
-    //sendEvent(name: "presence", value: "present")
-    on()
+    sendEvent(name: "presence", value: "present")
 }
 
 def on() {
+    sendEvent(name: "switch", value: "on")
     arrived()
 }
 
 def off() {
+    sendEvent(name: "switch", value: "off")
     departed()
 }
 
 def arrived() {
     log.trace "Executing 'arrived()'"
     sendEvent(name: "presence", value: "present")
+    sendEvent(name: "switch", value: "on")
 }
 
 def departed() {
     log.trace "Executing 'departed()'"
     sendEvent(name: "presence", value: "not present")
+    sendEvent(name: "switch", value: "off")
 }
 
 def toggle() {
